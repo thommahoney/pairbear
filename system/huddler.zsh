@@ -6,7 +6,7 @@ alias wordp='ssh -p 880 tom@wordpress001.huddler.com '
 alias newdy='ssh tom@newdy.huddler.com '
 alias rudy='ssh tom@rudy.huddler.com '
 alias imp='ssh -p880 tom@import001.huddler.com '
-alias imp2='ssh -p880 tom@import003.huddler.com '
+alias imp2='ssh -p880 tom@import002.huddler.com '
 
 function ap {
 	if [ $@ -gt 9 ]; then
