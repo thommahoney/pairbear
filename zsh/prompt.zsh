@@ -59,7 +59,7 @@ todo(){
     let todos=num-2
     if [ $todos != 0 ]
     then
-      echo "$todos"
+      echo "$todos   "
     else
       echo ""
     fi
@@ -72,9 +72,22 @@ directory_name(){
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
+r_directory_name(){
+  echo "%{$fg_bold[red]%}%/%\/%{$reset_color%}"
+}
+
+host_prompt(){
+  echo "%{$fg_bold[yellow]%}%m%{$reset_color%}"
+}
+
+smilies(){
+  echo "%(?.%{$fg_bold[green]%}:%)%{$reset_color%}.%{$fg_bold[red]%}:(%{$reset_color%})"
+}
+
+#export PROMPT=$'$(rb_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
+export PROMPT=$'\n$(host_prompt) in $(directory_name) $(git_dirty)$(need_push)\n$(smilies)  '
 set_prompt () {
-  export RPROMPT="%{$fg_bold[cyan]%}$(todo)%{$reset_color%}"
+  export RPROMPT="$(r_directory_name)  %{$fg_bold[cyan]%}$(todo)%{$reset_color%}"
 }
 
 precmd() {

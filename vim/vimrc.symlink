@@ -6,7 +6,7 @@ set noswapfile
 
 set autoindent             " automatic indent new lines
 set smartindent            " be smart about it
-inoremap # X<BS>#
+"inoremap # X<BS>#
 set nowrap                 " do not wrap lines
 set softtabstop=2          " yep, two
 set shiftwidth=2           " ..
@@ -60,6 +60,9 @@ set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
 set shortmess=filtIoOA     " shorten messages
 set report=0               " tell us about changes
 set nostartofline          " don't jump to the start of line when scrolling
+set scrolloff=10
+set statusline=\ %f\ %m%r%h%w\ [%{&ff}]\ %y\ [%c]\ [%l\/%L\ %p%%]
+set background=dark
 
 
 " ----------------------------------------------------------------------------
@@ -71,9 +74,22 @@ set mat=5                  " duration to show matching brace (1/10 sec)
 set incsearch              " do incremental searching
 set laststatus=2           " always show the status line
 set ignorecase             " ignore case when searching
-set nohlsearch             " don't highlight searches
+"set nohlsearch             " don't highlight searches
 set visualbell             " shut the fuck up
 
+" ---
+" Somethings that might not belong here
+" ---
+if &t_Co > 2 || has("gui_running")
+	syntax on
+	set hlsearch
+endif
+
+if &term=="xterm"
+	set t_Co=8
+	set t_Sb=^[[4%dm
+	set t_Sf=^[[3%dm
+endif
 
 " ---------------------------------------------------------------------------
 "  Strip all trailing whitespace in file
