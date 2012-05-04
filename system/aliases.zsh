@@ -9,5 +9,4 @@ then
   alias la='gls -A --color'
 fi
 
-
-
+alias s='search '

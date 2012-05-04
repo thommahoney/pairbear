@@ -8,3 +8,7 @@ function t() {
 }
 
 alias n="t ls +next"
+alias td="t do "
+alias ta="t ls '(A)'"
+alias tb="t ls '(B)'"
+alias tv="t ls '(C)'"
