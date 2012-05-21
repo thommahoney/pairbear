@@ -10,3 +10,5 @@ then
 fi
 
 alias s='search '
+
+alias mamp='cd /Applications/MAMP/htdocs/'

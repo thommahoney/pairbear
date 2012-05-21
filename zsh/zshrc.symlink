@@ -14,6 +14,10 @@ then
   source ~/.localrc
 fi
 
+__git_files () { 
+      _wanted files expl ‘local files’ _files 
+}
+
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 compinit
