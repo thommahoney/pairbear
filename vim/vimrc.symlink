@@ -64,6 +64,9 @@ set scrolloff=10
 set statusline=\ %f\ %m%r%h%w\ [%{&ff}]\ %y\ [%c]\ [%l\/%L\ %p%%]
 set background=dark
 
+highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929 
+match OverLength /\%81v.\+/
+
 
 " ----------------------------------------------------------------------------
 " Visual Cues

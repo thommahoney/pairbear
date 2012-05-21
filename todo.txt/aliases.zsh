@@ -7,6 +7,10 @@ function t() {
   fi
 }
 
+function tn() {
+  todo.sh app $1 +next
+}
+
 alias n="t ls +next"
 alias td="t do "
 alias ta="t ls '(A)'"
