@@ -1,12 +1,14 @@
 {
-	"auto_upgrade_last_run": 1340744306,
+	"auto_upgrade_last_run": 1353106809,
 	"installed_packages":
 	[
 		"Additional PHP Snippets",
 		"Alignment",
+		"Auto Semi-Colon",
 		"Format SQL",
 		"Git",
 		"Package Control",
+		"SideBarEnhancements",
 		"SublimeBlockCursor",
 		"SublimeCodeIntel"
 	]

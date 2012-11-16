@@ -5,5 +5,14 @@
 	[
 		"Vintage"
 	],
-	"theme": "Soda Dark.sublime-theme"
+	"theme": "Soda Dark.sublime-theme",
+
+	"bold_folder_labels": true,
+	"caret_style": "phase",
+	"highlight_line": true,
+	"trim_trailing_white_space_on_save": true,
+	"scroll_past_end": true,
+	"find_selected_text": true,
+	"auto_complete_commit_on_tab": true,
+	"ignored_packages": []
 }

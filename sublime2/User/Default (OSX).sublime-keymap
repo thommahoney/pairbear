@@ -1,2 +1,4 @@
 [
+	{ "keys": ["ctrl+s"], "command": "toggle_side_bar" },
+	{ "keys": ["ctrl+1"], "command": "toggle_setting", "args": {"setting": "gutter"} }
 ]
