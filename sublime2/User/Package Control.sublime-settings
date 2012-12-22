@@ -1,10 +1,11 @@
 {
-	"auto_upgrade_last_run": 1353106809,
+	"auto_upgrade_last_run": null,
 	"installed_packages":
 	[
 		"Additional PHP Snippets",
 		"Alignment",
 		"Auto Semi-Colon",
+		"FileDiffs",
 		"Format SQL",
 		"Git",
 		"Package Control",

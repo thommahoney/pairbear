@@ -1,4 +1,5 @@
 [
 	{ "keys": ["ctrl+s"], "command": "toggle_side_bar" },
-	{ "keys": ["ctrl+1"], "command": "toggle_setting", "args": {"setting": "gutter"} }
+	{ "keys": ["ctrl+i"], "command": "toggle_setting", "args": {"setting": "gutter"} },
+	{ "keys": ["ctrl+shift+d"], "command": "file_diff_menu" }
 ]
