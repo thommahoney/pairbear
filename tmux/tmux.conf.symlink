@@ -3,6 +3,7 @@
 # bind C-a send-prefix
 #set-option -g default-command "reattach-to-user-namespace -l bash"
 set-option -g default-shell /bin/zsh
+#set-option -g default-terminal "screen-256color"
 
 # basic settings
 set-window-option -g mode-keys vi # vi key
@@ -46,7 +47,7 @@ bind -r C-P pasteb
 
 # window title
 set-option -g set-titles on
-set-option -g set-titles-string '#S:#I.#P #W' # window number,program name,active (or not)
+set-option -g set-titles-string "#P" # window number,program name,active (or not)
 set-window-option -g automatic-rename on # auto name
 
 # messages
@@ -67,14 +68,16 @@ set-window-option -g automatic-rename on # auto name
 
 # status bar
 set-option -g status-utf8 on
-set-option -g status-justify right
-set-option -g status-bg red
-set-option -g status-fg colour70 #cyan
+set-option -g status-justify "centre" 
+set-option -g status-bg colour235 #red
+#set-option -g status-fg colour70 #cyan
 set-option -g status-interval 5
-set-option -g status-left-length 100
-set-option -g status-right-length 100
-set-option -g status-left '#[fg=cyan] (#S)#(whoami) #[fg=colour100,bold]#T#[default]'
-set-option -g status-right '#[fg=cyan]#[fg=yellow,bold]#[fg=yellow]%R %m-%d#[default]#(uptime | cut -d "," -f2-3)#[default]'
+set-option -g status-left-length 150
+set-option -g status-right-length 150
+#set-option -g status-left '#[fg=cyan] (#S)#(whoami) #[fg=colour100,bold]#T#[default]'
+#set-option -g status-right '#[fg=cyan]#[fg=yellow,bold]#[fg=yellow]%R %m-%d#[default]#(uptime | cut -d "," -f2-3)#[default]'
+set-option -g status-left "#(~/powerline/tmux-powerline/powerline.sh left)"
+set-option -g status-right "#(~/powerline/tmux-powerline/powerline.sh right)"
 set-option -g visual-activity on 
 set-window-option -g monitor-activity on
 set-window-option -g window-status-current-fg white
@@ -85,6 +88,4 @@ set-window-option -g clock-mode-colour cyan
 set-window-option -g clock-mode-style 12
 
 #set -g status-right '#[fg=yellow]#(cut -d " " -f 1-3 /proc/loadavg)#[default] #[fg=blue]%H:%M#[default]'
-
-
 
