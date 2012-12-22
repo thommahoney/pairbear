@@ -86,6 +86,7 @@ smilies(){
 
 #export PROMPT=$'$(rb_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
 export PROMPT=$'\n$(host_prompt) in $(directory_name) $(git_dirty)$(need_push)\n$(smilies)  '
+PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 set_prompt () {
   export RPROMPT="$(r_directory_name)  %{$fg_bold[cyan]%}$(todo)%{$reset_color%}"
 }
