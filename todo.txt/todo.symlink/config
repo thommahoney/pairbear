@@ -4,7 +4,7 @@
 #export TODO_DIR="/Users/gina/Documents/todo"
 #export TODO_DIR=`dirname "$0"`
 #export TODO_DIR="/Users/tommy/Documents/todo"
-export TODO_DIR="/Users/tommy/Dropbox/Docs/todo"
+export TODO_DIR="/home/tommy/Dropbox/Docs/todo"
 
 # Your todo/done/report.txt locations
 export TODO_FILE="$TODO_DIR/todo.txt"
