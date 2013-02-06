@@ -1,0 +1,6 @@
+[submodule "vim/vim.symlink/bundle/fugitive"]
+	path = vim/vim.symlink/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim.symlink/bundle/sensible"]
+	path = vim/vim.symlink/bundle/sensible
+	url = https://github.com/tpope/vim-sensible.git
