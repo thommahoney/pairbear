@@ -19,3 +19,6 @@
 [submodule "vim/vim.symlink/bundle/ack"]
 	path = vim/vim.symlink/bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "vim/vim.symlink/bundle/gundo"]
+	path = vim/vim.symlink/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
