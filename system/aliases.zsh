@@ -15,5 +15,6 @@ else
 fi
 
 alias s='search '
+alias jii='ssh tommy@jii.es'
 
 alias mamp='cd /Applications/MAMP/htdocs/'
