@@ -56,6 +56,11 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" resizing splits
+nnoremap <S-C-l> :vertical resize -5<cr>
+nnoremap <S-C-j> :resize +5<cr>
+nnoremap <S-C-k> :resize -5<cr>
+nnoremap <S-C-h> :vertical resize +5<cr>
 
 " ----------------------------------------------------------------------------
 "  UI
@@ -88,6 +93,10 @@ set ttyfast
 
 if version >= 703
 	"set relativenumber
+	nnoremap <F5> :GundoToggle<CR>
+	let g:gundo_width = 40
+	let g:gundo_preview_height = 30
+	let g:gundo_preview_bottom = 1
 endif
 
 " this should fix vims crazy regex shit to work like PERL/Python
