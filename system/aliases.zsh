@@ -8,10 +8,10 @@ then
   alias ll="gls -l --color"
   alias la='gls -A --color'
 else
-  alias ls="ls -F --color"
-  alias l="ls -lAh --color"
-  alias ll="ls -l --color"
-  alias la='ls -A --color'
+  alias ls="ls -F -G"
+  alias l="ls -lAh -G"
+  alias ll="ls -l -G"
+  alias la='ls -A -G'
 fi
 
 alias s='search '
