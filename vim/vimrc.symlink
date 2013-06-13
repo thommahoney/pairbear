@@ -83,6 +83,10 @@ set background=dark
 let g:solarized_contrast="high"
 colorscheme solarized
 
+" Splits
+set splitbelow
+set splitright
+
 "----------------------------------------------------------------------------
 " Most of these are from stevelosh.com/blog/2010/09/coming-home-to-vim/
 "----------------------------------------------------------------------------
