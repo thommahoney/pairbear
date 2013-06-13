@@ -5,12 +5,15 @@
 		"Additional PHP Snippets",
 		"Alignment",
 		"Auto Semi-Colon",
+		"DashDoc",
 		"FileDiffs",
 		"Format SQL",
 		"Git",
+		"GitGutter",
 		"Package Control",
 		"SideBarEnhancements",
 		"SublimeBlockCursor",
-		"SublimeCodeIntel"
+		"SublimeCodeIntel",
+		"SublimeLinter"
 	]
 }
