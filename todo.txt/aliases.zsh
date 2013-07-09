@@ -5,7 +5,11 @@ function t() {
 	else
 		VAR=$1
 		shift
-		ssh -qt tommy@goatorboat.com "/usr/local/todo.txt-cli/todo.sh $VAR \"$*\" "
+		if [ "$VAR" = "p" -o "$VAR" = "app" ]; then
+			ssh -qt tommy@goatorboat.com "/usr/local/todo.txt-cli/todo.sh $VAR $* "
+		else
+			ssh -qt tommy@goatorboat.com "/usr/local/todo.txt-cli/todo.sh $VAR \"$*\" "
+		fi
 	fi
 }
 
