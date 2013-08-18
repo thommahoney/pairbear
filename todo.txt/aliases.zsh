@@ -17,9 +17,9 @@ function tn() {
 	t app $1 +next
 }
 
-
 alias n="t ls +next"
 alias tt="t ls +tix"
+alias tw="t ls +work"
 alias td="t do "
 alias ta="t ls '(A)'"
 alias tb="t ls '(B)'"
