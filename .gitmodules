@@ -9,7 +9,7 @@
 	url = https://github.com/kien/ctrlp.vim.git
 [submodule "vim/vim.symlink/bundle/solarized"]
 	path = vim/vim.symlink/bundle/solarized
-	url = git@github.com:alieander/vim-colors-solarized.git
+	url = https://github.com/alieander/vim-colors-solarized.git
 [submodule "vim/vim.symlink/bundle/surround"]
 	path = vim/vim.symlink/bundle/surround
 	url = https://github.com/tpope/vim-surround.git
@@ -22,3 +22,9 @@
 [submodule "vim/vim.symlink/bundle/gundo"]
 	path = vim/vim.symlink/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
+[submodule "vim/vim.symlink/bundle/nerdtree"]
+	path = vim/vim.symlink/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/vim.symlink/bundle/numbers"]
+	path = vim/vim.symlink/bundle/numbers
+	url = https://github.com/myusuf3/numbers.vim.git
