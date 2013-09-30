@@ -57,10 +57,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " resizing splits
-"nnoremap <A-l> :vertical resize -5<cr>
-"nnoremap <A-j> :resize +5<cr>
-"nnoremap <A-k> :resize -5<cr>
-"nnoremap <A-h> :vertical resize +5<cr>
+nnoremap <A-l> :vertical resize -5<cr>
+nnoremap <A-j> :resize +5<cr>
+nnoremap <A-k> :resize -5<cr>
+nnoremap <A-h> :vertical resize +5<cr>
 
 " ----------------------------------------------------------------------------
 "  UI
@@ -83,12 +83,30 @@ set nostartofline          " don't jump to the start of line when scrolling
 set scrolloff=10
 "set statusline=\ %f\ %m%r%h%w\ [%{&ff}]\ %y\ [%c]\ [%l\/%L\ %p%%]
 set background=dark
-let g:solarized_contrast="high"
+let g:solarized_contrast="normal"
+let g:solarized_visibility="low"
 colorscheme solarized
 
 " Splits
 set splitbelow
 set splitright
+
+"----------------------------------------------------------------------------
+" Plugin stuff
+"----------------------------------------------------------------------------
+let g:numbers_exclude = ['gundo', 'nerdtree']
+nnoremap <F3> :NumbersToggle<CR>
+nnoremap <F4> :NERDTreeToggle<CR>
+
+"----------------------------------------------------------------------------
+" Personal
+"----------------------------------------------------------------------------
+:nmap \o :set paste!<CR>
+
+" Buffer things
+:nmap <C-e> :e#<CR>
+nnoremap <leader>n :bnext<cr>
+nnoremap <leader>p :bprevious<cr>
 
 "----------------------------------------------------------------------------
 " Most of these are from stevelosh.com/blog/2010/09/coming-home-to-vim/
@@ -106,7 +124,7 @@ endif
 " this should fix vims crazy regex shit to work like PERL/Python
 "nnoremap / /\v
 "vnoremap / /\v
-set gdefault				"this will make \g the default in searches... GREAT!
+set gdefault    "this will make \g the default in searches... GREAT!
 
 nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
@@ -116,7 +134,7 @@ vnoremap <tab> %
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+set colorcolumn=80
 
 set list
 set listchars=tab:▸\ ,eol:↘
@@ -146,8 +164,8 @@ set mat=5                  " duration to show matching brace (1/10 sec)
 set incsearch              " do incremental searching
 set laststatus=2           " always show the status line
 set ignorecase             " ignore case when searching
-set smartcase				" search string with mixed case will be case sensitive
-"set nohlsearch             " don't highlight searches
+set smartcase              " search string with mixed case will be case sensitive
+"set nohlsearch            " don't highlight searches
 set visualbell             " shut the fuck up
 
 " ---
