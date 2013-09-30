@@ -98,6 +98,16 @@ let g:numbers_exclude = ['gundo', 'nerdtree']
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NERDTreeToggle<CR>
 
+" NERDCommenter 
+nnoremap <leader>c<space> :NERDComToggleComment
+
+" Tabular
+nnoremap <Leader>a= :Tabularize /=
+nnoremap <Leader>a: :Tabularize /:
+nnoremap <Leader>a:: :Tabularize /:\zs
+nnoremap <Leader>a, :Tabularize /,
+nnoremap <Leader>a<Bar> :Tabularize /|
+
 "----------------------------------------------------------------------------
 " Personal
 "----------------------------------------------------------------------------
@@ -107,6 +117,8 @@ nnoremap <F4> :NERDTreeToggle<CR>
 :nmap <C-e> :e#<CR>
 nnoremap <leader>n :bnext<cr>
 nnoremap <leader>p :bprevious<cr>
+
+nnoremap Y y$
 
 "----------------------------------------------------------------------------
 " Most of these are from stevelosh.com/blog/2010/09/coming-home-to-vim/
