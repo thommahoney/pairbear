@@ -108,6 +108,10 @@ nnoremap <Leader>a:: :Tabularize /:\zs
 nnoremap <Leader>a, :Tabularize /,
 nnoremap <Leader>a<Bar> :Tabularize /|
 
+" CtrlP
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
+
 "----------------------------------------------------------------------------
 " Personal
 "----------------------------------------------------------------------------

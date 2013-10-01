@@ -29,7 +29,8 @@
 		"line_current_symbol":      { "fg": "gray13", "bg": "lightyellow" },
 		"virtcol_current_gradient": { "fg": "GREEN_Orange_red", "bg": "gray10" },
 		"col_current":              { "fg": "azure4", "bg": "lightyellow" },
-		"environment":              { "fg": "gray61", "bg": "royalblue5" }
+		"environment":              { "fg": "gray61", "bg": "royalblue5" },
+		"syntastic_segment":        { "fg": "red", "bg": "royalblue5", "attr": ["bold"] }
 	},
 	"mode_translations": {
 		"nc": {
@@ -67,7 +68,8 @@
 				"line_percent_gradient":  { "fg": "oldlace", "bg": "gray61" },
 				"line_current":           { "fg": "gray13", "bg": "oldlace", "attr": ["bold"] },
 				"line_current_symbol":    { "fg": "gray13", "bg": "oldlace" },
-				"col_current":            { "fg": "azure4", "bg": "oldlace" }
+				"col_current":            { "fg": "azure4", "bg": "oldlace" },
+				"syntastic_segment":      { "fg": "lightyellow", "bg": "darkgreencopper", "attr": ["bold"] }
 			}
 		},
 		"v": {
