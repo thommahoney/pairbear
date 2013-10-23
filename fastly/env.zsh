@@ -1,0 +1,1 @@
+FASTLY=$PROJECTS/fastly/
