@@ -122,6 +122,8 @@ let g:ctrlp_match_window_reversed = 0
 nnoremap <leader>n :bnext<cr>
 nnoremap <leader>p :bprevious<cr>
 
+nnoremap <leader><leader> <C-^><cr>
+
 nnoremap Y y$
 
 "----------------------------------------------------------------------------
