@@ -112,6 +112,12 @@ nnoremap <Leader>a<Bar> :Tabularize /|
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 
+" Syntastic
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='~'
+
+
+
 "----------------------------------------------------------------------------
 " Personal
 "----------------------------------------------------------------------------
@@ -125,6 +131,8 @@ nnoremap <leader>p :bprevious<cr>
 nnoremap <leader><leader> <C-^><cr>
 
 nnoremap Y y$
+
+nmap <F12> :!rspec -c -P %<cr>
 
 "----------------------------------------------------------------------------
 " Most of these are from stevelosh.com/blog/2010/09/coming-home-to-vim/
@@ -200,6 +208,15 @@ if &term=="xterm"
 	set t_Sf=^[[3%dm
 endif
 
+function! RubyTabs()
+	set tabstop=2
+	set softtabstop=2
+	set shiftwidth=2
+	set expandtab
+endfunction
+
+autocmd FileType ruby call RubyTabs()
+
 " ---------------------------------------------------------------------------
 "  Strip all trailing whitespace in file
 " ---------------------------------------------------------------------------
@@ -211,6 +228,6 @@ map ,s :call StripWhitespace ()<CR>
 
 let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>'],'AcceptSelection("t")': ['<cr>', '<c-m>'],}
 
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
