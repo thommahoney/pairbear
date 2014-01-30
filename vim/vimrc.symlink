@@ -77,6 +77,7 @@ set number                 " line numbers
 set ch=1                   " command line height
 set backspace=2            " allow backspacing over everything in insert mode
 set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
+set cursorline
 set shortmess=filtIoOA     " shorten messages
 set report=0               " tell us about changes
 set nostartofline          " don't jump to the start of line when scrolling
@@ -98,7 +99,7 @@ let g:numbers_exclude = ['gundo', 'nerdtree']
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NERDTreeToggle<CR>
 
-" NERDCommenter 
+" NERDCommenter
 nnoremap <leader>c<space> :NERDComToggleComment
 
 " Tabular
@@ -109,7 +110,7 @@ nnoremap <Leader>a, :Tabularize /,
 nnoremap <Leader>a<Bar> :Tabularize /|
 
 " CtrlP
-let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_match_window_reversed = 0
 
 " Syntastic
@@ -133,6 +134,7 @@ nnoremap <leader><leader> <C-^><cr>
 nnoremap Y y$
 
 nmap <F12> :!rspec -c -P %<cr>
+nmap <F12> :!rake test:one\[%\]<cr>
 
 "----------------------------------------------------------------------------
 " Most of these are from stevelosh.com/blog/2010/09/coming-home-to-vim/
@@ -178,7 +180,7 @@ noremap ; :
 " --------------------------
 nnoremap <leader>w <C-w>v<C-w>l
 
-highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
+:hi OverLength ctermbg=darkred ctermfg=white guibg=#592929
 "match OverLength /\%91v.\+/
 
 " ----------------------------------------------------------------------------
@@ -224,10 +226,14 @@ autocmd FileType ruby call RubyTabs()
 function! StripWhitespace ()
     exec ':%s/ \+$//gc'
 endfunction
-map ,s :call StripWhitespace ()<CR>
+map <leader>s :call StripWhitespace ()<CR>
 
 let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>'],'AcceptSelection("t")': ['<cr>', '<c-m>'],}
 
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
+if !has("python3")
+	python from powerline.vim import setup as powerline_setup
+	python powerline_setup()
+	python del powerline_setup
+endif
+
+hi! link SignColumn DarkGrey
