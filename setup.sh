@@ -15,6 +15,9 @@ set -e
 #possible brew installs
 	#:python
 	#:git
+	#:chruby
+	#:ruby-install
+	#:the_silver_searcher
 
 #possible git repos for new mac
 	#:slate
