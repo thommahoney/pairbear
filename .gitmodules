@@ -37,3 +37,13 @@
 [submodule "vim/vim.symlink/bundle/syntastic"]
 	path = vim/vim.symlink/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
+[submodule "vim/vim.symlink/bundle/auto-pairs"]
+	path = vim/vim.symlink/bundle/auto-pairs
+	url = git://github.com/jiangmiao/auto-pairs.git
+[submodule "vim/vim.symlink/bundle/gitgutter"]
+	path = vim/vim.symlink/bundle/gitgutter
+	url = git://github.com/airblade/vim-gitgutter.git
+[submodule "vim/vim.symlink/bundle/ag"]
+	path = vim/vim.symlink/bundle/ag
+	url = https://github.com/rking/ag.vim
+
