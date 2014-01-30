@@ -36,35 +36,17 @@ need_push () {
   then
     echo " "
   else
-    echo " with %{$fg_bold[magenta]%}unpushed%{$reset_color%} "
+    echo "-%{$fg_bold[magenta]%}unpushed%{$reset_color%} "
   fi
 }
 
 rb_prompt(){
-  if $(which rbenv &> /dev/null)
+  s1=$(which ruby)
+  if [[ "$s1" != '/usr/bin/ruby' ]]
   then
-	  echo "%{$fg_bold[yellow]%}$(rbenv version | awk '{print $1}')%{$reset_color%}"
+	  echo "%{$fg_bold[yellow]%}$(ruby --version | awk '{print $2}')%{$reset_color%}"
 	else
 	  echo ""
-  fi
-}
-
-# This keeps the number of todos always available the right hand side of my
-# command line. I filter it to only count those tagged as "+next", so it's more
-# of a motivation to clear out the list.
-todo(){
-  if $(which todo.sh &> /dev/null)
-  then
-    num=$(echo $(todo.sh ls +next | wc -l))
-    let todos=num-2
-    if [ $todos != 0 ]
-    then
-      echo "$todos   "
-    else
-      echo ""
-    fi
-  else
-    echo ""
   fi
 }
 
@@ -84,11 +66,10 @@ smilies(){
   echo "%(?.%{$fg_bold[green]%}:%)%{$reset_color%}.%{$fg_bold[red]%}:(%{$reset_color%})"
 }
 
-#export PROMPT=$'$(rb_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
 export PROMPT=$'\n$(host_prompt) in $(directory_name) $(git_dirty)$(need_push)\n$(smilies)  '
 PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 set_prompt () {
-  export RPROMPT="$(r_directory_name)  %{$fg_bold[cyan]%}$(todo)%{$reset_color%}"
+	export RPROMPT="$(r_directory_name) $(rb_prompt) "
 }
 
 precmd() {
