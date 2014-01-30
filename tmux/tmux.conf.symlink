@@ -1,9 +1,10 @@
 # command prefix (like screen)
 # set -g prefix C-a
 # bind C-a send-prefix
-#set-option -g default-command "reattach-to-user-namespace -l bash"
 set-option -g default-shell /bin/zsh
 #set-option -g default-terminal "screen-256color"
+#set-option -g default-terminal "xterm-256color"
+#set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 # basic settings
 set-window-option -g mode-keys vi # vi key
@@ -28,6 +29,16 @@ unbind '"'
 bind _ split-window -v # vertical split
 bind -r C-j previous-window
 bind -r C-k next-window
+bind -r C-b next-window
+
+bind-key -r h select-pane -L
+bind-key -r j select-pane -D
+bind-key -r k select-pane -U
+bind-key -r l select-pane -R
+bind-key -r H select-pane -L
+bind-key -r J select-pane -D
+bind-key -r K select-pane -U
+bind-key -r L select-pane -R
 #bind -r C-v last-window
 
 #bind C-v run-shell "reattach-to-user-namespace -l zsh -c 'tmux set-buffer \"$(pbpaste)\"; tmux paste-buffer'"
@@ -93,3 +104,6 @@ source '/usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline
 #set-window-option -g monitor-activity on
 #set-window-option -g window-status-current-fg white
 set-option -g history-limit 100000;
+
+#set-option -g default-command "which reattach-to-user-namespace >/dev/null && reattach-to-user-namespace -l zsh || zsh"
+
