@@ -1,7 +1,7 @@
 case $OSTYPE in
 *"darwin"*)
-	export GOVERSION="1.1"
-	export GOROOT="$(brew --prefix)"/Cellar/go/$GOVERSION
+	#export GOVERSION="1.2.1"
+	#export GOROOT="$(brew --prefix)"/Cellar/go/$GOVERSION
 	export GOPATH=$PROJECTS/gocode
 	export PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin
 	;;

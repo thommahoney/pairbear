@@ -7,7 +7,7 @@ set -e
 # use -iru to search directories ack usually ignores (like .git)
 if $(command -v ag &>/dev/null)
 then
-	ag -i $1
+	ag -i $@
 else
-	ack -i $1
+	ack -i $@
 fi

@@ -4,6 +4,9 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 filetype plugin indent on
 
+set shell=sh
+set shell=/bin/bash
+
 set nocompatible
 
 set noswapfile
@@ -62,6 +65,9 @@ nnoremap <A-j> :resize +5<cr>
 nnoremap <A-k> :resize -5<cr>
 nnoremap <A-h> :vertical resize +5<cr>
 
+nnoremap <silent> <Leader>= :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+
 " ----------------------------------------------------------------------------
 "  UI
 " ----------------------------------------------------------------------------
@@ -113,6 +119,8 @@ nnoremap <Leader>a<Bar> :Tabularize /|
 let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_match_window_reversed = 0
 
+let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-v>', '<2-LeftMouse>'], 'AcceptSelection("v")': ['<cr>', '<RightMouse>'] }
+
 " Syntastic
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='~'
@@ -129,12 +137,15 @@ let g:syntastic_warning_symbol='~'
 nnoremap <leader>n :bnext<cr>
 nnoremap <leader>p :bprevious<cr>
 
-nnoremap <leader><leader> <C-^><cr>
+nnoremap <leader><leader> <C-w><C-w>
 
 nnoremap Y y$
 
 nmap <F12> :!rspec -c -P %<cr>
 nmap <F12> :!rake test:one\[%\]<cr>
+nmap <F12> :!ruby -Itest %<cr>
+
+nmap <F6> :vsplit `~/Projects/bin/open_test.sh %:p`<cr>
 
 "----------------------------------------------------------------------------
 " Most of these are from stevelosh.com/blog/2010/09/coming-home-to-vim/
