@@ -124,6 +124,7 @@ let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-v>', '<2-LeftMouse>
 " Syntastic
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='~'
+let g:loaded_syntastic_ruby_rubocop_checker=1
 
 
 

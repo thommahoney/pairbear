@@ -50,3 +50,9 @@
 [submodule "vim/vim.symlink/bundle/vim-json"]
 	path = vim/vim.symlink/bundle/vim-json
 	url = https://github.com/elzr/vim-json
+[submodule "vim/vim.symlink/bundle/rails"]
+	path = vim/vim.symlink/bundle/rails
+	url = https://github.com/tpope/vim-rails.git
+[submodule "vim/vim.symlink/bundle/bundler"]
+	path = vim/vim.symlink/bundle/bundler
+	url = https://github.com/tpope/vim-bundler.git
