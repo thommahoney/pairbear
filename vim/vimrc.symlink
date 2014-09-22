@@ -17,7 +17,7 @@ set noswapfile
 set autoindent             " automatic indent new lines
 set smartindent            " be smart about it
 "inoremap # X<BS>#
-"set nowrap                 " do not wrap lines
+set nowrap                 " do not wrap lines
 set softtabstop=4
 set shiftwidth=4
 set tabstop=4
@@ -171,7 +171,6 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " changing wrapping
-set wrap
 set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=80
