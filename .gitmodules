@@ -56,6 +56,6 @@
 [submodule "vim/vim.symlink/bundle/bundler"]
 	path = vim/vim.symlink/bundle/bundler
 	url = https://github.com/tpope/vim-bundler.git
-[submodule "vim/vim.symlink/bundle/ragtag"]
-	path = vim/vim.symlink/bundle/ragtag
-	url = git@github.com:tpope/vim-ragtag.git
+[submodule "vim/vim.symlink/bundle/emmet-vim"]
+	path = vim/vim.symlink/bundle/emmet-vim
+	url = git@github.com:mattn/emmet-vim.git
