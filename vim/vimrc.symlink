@@ -124,7 +124,10 @@ let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-v>', '<2-LeftMouse>
 " Syntastic
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='~'
-let g:loaded_syntastic_ruby_rubocop_checker=1
+let g:syntastic_quiet_warnings=0
+let g:syntastic_ruby_checkers=['mri']
+let g:syntastic_ruby_checkers=['mri', 'rubocop']
+
 
 
 
@@ -144,7 +147,8 @@ nnoremap Y y$
 
 nmap <F12> :!rspec -c -P %<cr>
 nmap <F12> :!rake test:one\[%\]<cr>
-nmap <F12> :!ruby -Itest %<cr>
+nmap <F12> :!bundle exec rake test TEST=%<cr>
+nmap <F8>  :SyntasticCheck rubocop<cr>
 
 nmap <F6> :vsplit `~/Projects/bin/open_test.sh %:p`<cr>
 

@@ -20,3 +20,4 @@ alias gb='git branch'
 alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
 alias gis='git status '
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
+alias gsu="git push --set-upstream origin"
