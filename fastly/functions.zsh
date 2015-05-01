@@ -1,14 +1,33 @@
-VERSION='0.2.0'
-pauper_up() {
-	ssh -t tommy@turret.local 'cd /home/tommy/fastly/pauper-env; ./start.sh';
-	cd /Users/tommy/Projects/fastly/pauper-env;
-	pauper setup_osx;
+function fastly_route {
+	sudo route add 10.215.0.0/24 fastlydev.local
 }
 
-pauper_install() {
-	cd /Users/tommy/Projects/fastly/Pauper;
-	sudo gem build pauper.gemspec;
-	sudo gem install pauper-$VERSION.gem;
-	ssh -t tommy@turret.local "cd /home/tommy/fastly/Pauper; sudo gem install pauper-$VERSION.gem";
+function fusion {
+  /Applications/VMware\ Fusion.app/Contents/Library/vmrun -T fusion $1 ~/Documents/fastlydev.vmwarevm nogui
 }
 
+function fusion2 {
+  /Applications/VMware\ Fusion.app/Contents/Library/vmrun -T fusion $1 ~/Documents/fastlydev2.vmwarevm nogui
+}
+
+function morning {
+	fusion start
+	echo 'sleeping 15'
+	sleep 5
+	echo 'sleeping 10'
+	sleep 5
+	echo 'sleeping 5'
+	sleep 5
+	fastly_route
+}
+
+function morning2 {
+	fusion2 start
+	echo 'sleeping 15'
+	sleep 5
+	echo 'sleeping 10'
+	sleep 5
+	echo 'sleeping 5'
+	sleep 5
+	fastly_route
+}
