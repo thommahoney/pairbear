@@ -15,20 +15,16 @@ set -e
 #possible brew installs
 	#:python
 	#:git
+	#:vim
 	#:chruby
 	#:ruby-install
-	#:the_silver_searcher
 
 #possible git repos for new mac
 	#:slate
 	#:powerline
 	#:powerline-fonts
-	#:geeknote
 
 
-
-#git clone git://github.com/VitaliyRodnenko/geeknote.git
-#geeknotes.py login
 
 
 #cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
