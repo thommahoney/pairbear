@@ -3,18 +3,14 @@
 #   `brew install coreutils`
 if $(gls &>/dev/null)
 then
-  alias ls="gls -F --color"
-  alias l="gls -lAh --color"
-  alias ll="gls -l --color"
-  alias la='gls -A --color'
+  gls_command='gls'
+  gls_color='--color'
 else
-  alias ls="ls -F -G"
-  alias l="ls -lAh -G"
-  alias ll="ls -l -G"
-  alias la='ls -A -G'
+  gls_command='ls'
+  gls_color='-G'
 fi
 
-alias s='search '
-alias jii='ssh tommy@jii.es'
-
-alias mamp='cd /Applications/MAMP/htdocs/'
+alias ls="gls_command -F $gls_color"
+alias l="gls_command -lAh $gls_color"
+alias ll="gls_command -l $gls_color"
+alias la="gls_command -A $gls_color"
