@@ -44,9 +44,9 @@ rb_prompt(){
   s1=$(which ruby)
   if [[ "$s1" != '/usr/bin/ruby' ]]
   then
-	  echo "%{$fg_bold[yellow]%}$(ruby --version | awk '{print $2}')%{$reset_color%}"
-	else
-	  echo ""
+    echo "%{$fg_bold[yellow]%}$(ruby --version | awk '{print $2}')%{$reset_color%}"
+  else
+    echo ""
   fi
 }
 
@@ -69,7 +69,7 @@ smilies(){
 export PROMPT=$'\n$(host_prompt) in $(directory_name) $(git_dirty)$(need_push)\n$(smilies)  '
 PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 set_prompt () {
-	export RPROMPT="$(r_directory_name) $(rb_prompt) "
+  export RPROMPT="$(r_directory_name) $(rb_prompt) "
 }
 
 precmd() {
