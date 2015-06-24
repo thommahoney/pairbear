@@ -1,34 +1,45 @@
-filetype off
-execute pathogen#infect()
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-filetype plugin indent on
-
-set shell=sh
+" ----------------------------------------------------------------------------
+"  Generic Settings
+" ----------------------------------------------------------------------------
+set ttyfast
 set shell=/bin/bash
-
-set nocompatible
-
 set noswapfile
-" ----------------------------------------------------------------------------
-"  Text Formatting
-" ----------------------------------------------------------------------------
 
-set autoindent             " automatic indent new lines
-set smartindent            " be smart about it
-"inoremap # X<BS>#
-set nowrap                 " do not wrap lines
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
-"set expandtab              " expand tabs to spaces
-"set nosmarttab             " fuck tabs
-set formatoptions+=n       " support for numbered/bullet lists
-"set textwidth=80           " wrap at 80 chars by default
-set virtualedit=block      " allow virtual edit in visual block ..
+" Indenting and Tabs
+set autoindent        " automatic indent new lines
+set smartindent       " be smart about it
+"set nosmarttab       " fuck tabs
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab         " expand tabs to spaces
+set formatoptions+=n  " support for numbered/bullet lists
+
+set nowrap            " do not wrap lines
+"set textwidth=80     " wrap at 80 chars by default
+set virtualedit=block " allow virtual edit in visual block
+                      " (will go into spaces with no characters)
+
+set laststatus=2      " always show the status line
+set showmatch         " brackets/braces that is
+set mat=5             " duration to show matching brace (1/10 sec)
+set incsearch         " do incremental searching
+set ignorecase        " ignore case when searching
+set smartcase         " search string with mixed case will be case sensitive
+set visualbell        " shut the fuck up
+
+" changing wrapping
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=80 " show vertical line at line 80
+
+" show invisable characters
+set list
+set listchars=tab:▸\ ,eol:↘
+
 
 " ----------------------------------------------------------------------------
-"  Remapping
+"  Generic Remapping
 " ----------------------------------------------------------------------------
 
 " lead with ,
@@ -37,10 +48,23 @@ let mapleader = ","
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
 
+" make Y act like A, I, D, etc
+nnoremap Y y$
 
 " reflow paragraph with Q in normal and visual mode
 nnoremap Q gqap
 vnoremap Q gq
+
+" Quit toggle paste mode
+:nmap \o :set paste!<cr>
+
+"  toggle to last buffer
+:nmap <C-e> :e#<cr>
+nnoremap <leader>n :bnext<cr>
+nnoremap <leader>p :bprevious<cr>
+
+" move cursor to next split
+nnoremap <leader><leader> <C-w><C-w>
 
 " sane movement with wrap turned on
 nnoremap j gj
@@ -59,6 +83,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
 " resizing splits
 nnoremap <A-l> :vertical resize -5<cr>
 nnoremap <A-j> :resize +5<cr>
@@ -68,39 +93,80 @@ nnoremap <A-h> :vertical resize +5<cr>
 nnoremap <silent> <Leader>= :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
+" clear search highlighting
+nnoremap <leader><space> :noh<cr>
+
+" remove silly help key
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+" make ; : do the same thing
+noremap ; :
+
+" quick buffer delete
+nnoremap <leader>` :bd
+" quick cat this file
+nnoremap <leader>c :!cat %
+
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Wa ((getcmdtype() is# ':' && getcmdline() is# 'Wa')?('wa'):('Wa'))
+cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa'):('Wqa'))
+cnoreabbrev <expr> E ((getcmdtype() is# ':' && getcmdline() is# 'E')?('e'):('E'))
+
+nnoremap <leader>f :CtrlP<CR>
+
+
 " ----------------------------------------------------------------------------
 "  UI
 " ----------------------------------------------------------------------------
 
-" doing this for powerline...
-set noshowmode
+set noshowmode             " hide --- MODE --- line as airline is good enough
 
 set ruler                  " show the cursor position all the time
+set cursorline
 set nolazyredraw           " turn off lazy redraw
 set number                 " line numbers
-"set wildmenu               " turn on wild menu
-"set wildmode=list:longest,full
+
 set ch=1                   " command line height
 set backspace=2            " allow backspacing over everything in insert mode
 set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
-set cursorline
 set shortmess=filtIoOA     " shorten messages
-set report=0               " tell us about changes
+set report=0               " tell us about changes (default 2)
+                           " represents the number of lines needed to change
+                           " before warning
+
 set nostartofline          " don't jump to the start of line when scrolling
-set scrolloff=10
-"set statusline=\ %f\ %m%r%h%w\ [%{&ff}]\ %y\ [%c]\ [%l\/%L\ %p%%]
+set scrolloff=10           " keep cursor 10 lines from the top or bottom
+
+" Wild menu ??? -------------------------------
+"set wildmenu
+"set wildmode=list:longest,full
+" ---------------------------------------------
+
+" Splits --------------------------------------
+"  set default split directions
+set splitbelow
+set splitright
+
+" open a new split
+nnoremap <leader>w <C-w>v<C-w>l
+
+
+"----------------------------------------------------------------------------
+" Color Scheme (Solarized)
+"----------------------------------------------------------------------------
 set background=dark
 let g:solarized_contrast="normal"
 let g:solarized_visibility="low"
 colorscheme solarized
 
-" Splits
-set splitbelow
-set splitright
 
 "----------------------------------------------------------------------------
 " Plugin stuff
 "----------------------------------------------------------------------------
+
+" Numbers
 let g:numbers_exclude = ['gundo', 'nerdtree']
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NERDTreeToggle<CR>
@@ -120,6 +186,8 @@ let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_match_window_reversed = 0
 
 let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-v>', '<2-LeftMouse>'], 'AcceptSelection("v")': ['<cr>', '<RightMouse>'] }
+let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>'],'AcceptSelection("t")': ['<cr>', '<c-m>'],}
+
 
 " Syntastic
 let g:syntastic_error_symbol='✗'
@@ -127,89 +195,45 @@ let g:syntastic_warning_symbol='~'
 let g:syntastic_quiet_warnings=0
 let g:syntastic_ruby_checkers=['mri']
 "let g:syntastic_ruby_checkers=['mri', 'rubocop']
-
-
-
-
-"----------------------------------------------------------------------------
-" Personal
-"----------------------------------------------------------------------------
-:nmap \o :set paste!<CR>
-
-" Buffer things
-:nmap <C-e> :e#<CR>
-nnoremap <leader>n :bnext<cr>
-nnoremap <leader>p :bprevious<cr>
-
-nnoremap <leader><leader> <C-w><C-w>
-
-nnoremap Y y$
-
-nmap <F12> :!rspec -c -P %<cr>
-nmap <F12> :!rake test:one\[%\]<cr>
-nmap <F12> :!bundle exec rake test TEST=%<cr>
 nmap <F8>  :SyntasticCheck rubocop<cr>
 
-nmap <F6> :vsplit `~/Projects/bin/open_test.sh %:p`<cr>
-
-"----------------------------------------------------------------------------
-" Most of these are from stevelosh.com/blog/2010/09/coming-home-to-vim/
-"----------------------------------------------------------------------------
-set ttyfast
-
+" Gundo
 if version >= 703
-	"set relativenumber
-	nnoremap <F5> :GundoToggle<CR>
-	let g:gundo_width = 40
-	let g:gundo_preview_height = 30
-	let g:gundo_preview_bottom = 1
+  nnoremap <F5> :GundoToggle<CR>
+  let g:gundo_width = 40
+  let g:gundo_preview_height = 30
+  let g:gundo_preview_bottom = 1
 endif
 
-" this should fix vims crazy regex shit to work like PERL/Python
-"nnoremap / /\v
-"vnoremap / /\v
-set gdefault    "this will make \g the default in searches... GREAT!
+" AirLine
+let g:airline_powerline_fonts  = 1
+let g:airline_theme            = 'solarized'
+let g:airline_enable_branch    = 1
+let g:airline_enable_syntastic = 1
+let g:airline_enable_fugitive  = 1
+let g:airline_enable_ctrlp     = 1
+let g:airline_enable_gundo     = 1
+let g:airline_enable_nerdtree  = 1
 
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
+let g:airline#extensions#tabline#enabled = 1
 
-" changing wrapping
-set textwidth=79
-set formatoptions=qrn1
-set colorcolumn=80
 
-set list
-set listchars=tab:▸\ ,eol:↘
+"----------------------------------------------------------------------------
+" Search and Replace
+"----------------------------------------------------------------------------
 
-" remove silly help key
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
+set gdefault "this will make \g the default in searches.
+" always add \v . This makes searches require less escaping and act like egrep
+" this is literally called `very magic` mode...
+nnoremap / /\v
+vnoremap / /\v
+" make magic mode the default in find and replace as well.
+cnoremap %s/ %smagic/
+cnoremap \>s/ \>smagic/
+" this does not work well with :g... so shut that down.
+nnoremap :g/ :g/\v
+nnoremap :g// :g//
 
-" make ; : do the same thing
-noremap ; :
-
-"---------------------------
-" His workings on splits
-" --------------------------
-nnoremap <leader>w <C-w>v<C-w>l
-
-:hi OverLength ctermbg=darkred ctermfg=white guibg=#592929
-"match OverLength /\%91v.\+/
-
-" ----------------------------------------------------------------------------
-" Visual Cues
-" ----------------------------------------------------------------------------
-
-set showmatch              " brackets/braces that is
-set mat=5                  " duration to show matching brace (1/10 sec)
-set incsearch              " do incremental searching
-set laststatus=2           " always show the status line
-set ignorecase             " ignore case when searching
-set smartcase              " search string with mixed case will be case sensitive
-"set nohlsearch            " don't highlight searches
-set visualbell             " shut the fuck up
 
 " ---
 " Somethings that might not belong here
@@ -225,15 +249,6 @@ if &term=="xterm"
 	set t_Sf=^[[3%dm
 endif
 
-function! RubyTabs()
-	set tabstop=2
-	set softtabstop=2
-	set shiftwidth=2
-	set expandtab
-endfunction
-
-autocmd FileType ruby call RubyTabs()
-
 " ---------------------------------------------------------------------------
 "  Strip all trailing whitespace in file
 " ---------------------------------------------------------------------------
@@ -242,13 +257,5 @@ function! StripWhitespace ()
     exec ':%s/ \+$//gc'
 endfunction
 map <leader>s :call StripWhitespace ()<CR>
-
-let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>'],'AcceptSelection("t")': ['<cr>', '<c-m>'],}
-
-if !has("python3")
-	python from powerline.vim import setup as powerline_setup
-	python powerline_setup()
-	python del powerline_setup
-endif
 
 hi! link SignColumn DarkGrey
