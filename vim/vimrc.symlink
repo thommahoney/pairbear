@@ -1,254 +1,46 @@
-filetype off
-execute pathogen#infect()
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+"-----------------------------------------------------
+" Vundle (start)
+"-----------------------------------------------------
+"" Brief help
+"" :PluginList       - lists configured plugins
+"" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+"" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+"" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+
+set nocompatible " be iMproved, required
+filetype off     " required
+
+set rtp+=~/.vim/bundle/Vundle.vim " set the runtime path to include Vundle and initialize
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
+
+Plugin 'AndrewRadev/splitjoin.vim'        " split one-liners into equivalant multiliner
+Plugin 'airblade/vim-gitgutter'           " git status markers in left gutter
+Plugin 'altercation/vim-colors-solarized' " solarized color support
+Plugin 'bling/vim-airline'                " fancy status bar
+Plugin 'godlygeek/tabular'                " Alignment of code on things
+Plugin 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair
+Plugin 'jlanzarotta/bufexplorer'          " list view and manage buffers (<leader>be)
+Plugin 'kien/ctrlp.vim'                   " fuzzy search and text expansion for vim
+Plugin 'mileszs/ack.vim'                  " Ack search for vim
+Plugin 'myusuf3/numbers.vim'              " line numbers relative/absolute helper
+Plugin 'scrooloose/nerdcommenter'         " better auto-commenting (<leader>c<space)
+Plugin 'scrooloose/nerdtree'              " vim filebrowser
+Plugin 'scrooloose/syntastic'             " Syntax checking and highlighting
+Plugin 'sjl/gundo.vim'                    " undo tree browser and manager
+Plugin 'tpope/vim-bundler'                " bundler support
+Plugin 'tpope/vim-fugitive'               " Git in vim support
+Plugin 'tpope/vim-rails'                  " Rails support in vim
+Plugin 'tpope/vim-repeat'                 " remaps `.` for better plugin support
+Plugin 'tpope/vim-sensible'               " sensible defaults for vim
+Plugin 'tpope/vim-surround'               " change surrounding things with other things
+
+call vundle#end() " required
 filetype plugin indent on
 
-set shell=sh
+"-----------------------------------------------------
+" Vundle (end)
+"-----------------------------------------------------
+
 set shell=/bin/bash
-
-set nocompatible
-
 set noswapfile
-" ----------------------------------------------------------------------------
-"  Text Formatting
-" ----------------------------------------------------------------------------
-
-set autoindent             " automatic indent new lines
-set smartindent            " be smart about it
-"inoremap # X<BS>#
-set nowrap                 " do not wrap lines
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
-"set expandtab              " expand tabs to spaces
-"set nosmarttab             " fuck tabs
-set formatoptions+=n       " support for numbered/bullet lists
-"set textwidth=80           " wrap at 80 chars by default
-set virtualedit=block      " allow virtual edit in visual block ..
-
-" ----------------------------------------------------------------------------
-"  Remapping
-" ----------------------------------------------------------------------------
-
-" lead with ,
-let mapleader = ","
-
-" exit to normal mode with 'jj'
-inoremap jj <ESC>
-
-
-" reflow paragraph with Q in normal and visual mode
-nnoremap Q gqap
-vnoremap Q gq
-
-" sane movement with wrap turned on
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
-
-" movement for splits
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-" resizing splits
-nnoremap <A-l> :vertical resize -5<cr>
-nnoremap <A-j> :resize +5<cr>
-nnoremap <A-k> :resize -5<cr>
-nnoremap <A-h> :vertical resize +5<cr>
-
-nnoremap <silent> <Leader>= :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
-
-" ----------------------------------------------------------------------------
-"  UI
-" ----------------------------------------------------------------------------
-
-" doing this for powerline...
-set noshowmode
-
-set ruler                  " show the cursor position all the time
-set nolazyredraw           " turn off lazy redraw
-set number                 " line numbers
-"set wildmenu               " turn on wild menu
-"set wildmode=list:longest,full
-set ch=1                   " command line height
-set backspace=2            " allow backspacing over everything in insert mode
-set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
-set cursorline
-set shortmess=filtIoOA     " shorten messages
-set report=0               " tell us about changes
-set nostartofline          " don't jump to the start of line when scrolling
-set scrolloff=10
-"set statusline=\ %f\ %m%r%h%w\ [%{&ff}]\ %y\ [%c]\ [%l\/%L\ %p%%]
-set background=dark
-let g:solarized_contrast="normal"
-let g:solarized_visibility="low"
-colorscheme solarized
-
-" Splits
-set splitbelow
-set splitright
-
-"----------------------------------------------------------------------------
-" Plugin stuff
-"----------------------------------------------------------------------------
-let g:numbers_exclude = ['gundo', 'nerdtree']
-nnoremap <F3> :NumbersToggle<CR>
-nnoremap <F4> :NERDTreeToggle<CR>
-
-" NERDCommenter
-nnoremap <leader>c<space> :NERDComToggleComment
-
-" Tabular
-nnoremap <Leader>a= :Tabularize /=
-nnoremap <Leader>a: :Tabularize /:
-nnoremap <Leader>a:: :Tabularize /:\zs
-nnoremap <Leader>a, :Tabularize /,
-nnoremap <Leader>a<Bar> :Tabularize /|
-
-" CtrlP
-let g:ctrlp_match_window_bottom = 1
-let g:ctrlp_match_window_reversed = 0
-
-let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-v>', '<2-LeftMouse>'], 'AcceptSelection("v")': ['<cr>', '<RightMouse>'] }
-
-" Syntastic
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='~'
-let g:syntastic_quiet_warnings=0
-let g:syntastic_ruby_checkers=['mri']
-"let g:syntastic_ruby_checkers=['mri', 'rubocop']
-
-
-
-
-"----------------------------------------------------------------------------
-" Personal
-"----------------------------------------------------------------------------
-:nmap \o :set paste!<CR>
-
-" Buffer things
-:nmap <C-e> :e#<CR>
-nnoremap <leader>n :bnext<cr>
-nnoremap <leader>p :bprevious<cr>
-
-nnoremap <leader><leader> <C-w><C-w>
-
-nnoremap Y y$
-
-nmap <F12> :!rspec -c -P %<cr>
-nmap <F12> :!rake test:one\[%\]<cr>
-nmap <F12> :!bundle exec rake test TEST=%<cr>
-nmap <F8>  :SyntasticCheck rubocop<cr>
-
-nmap <F6> :vsplit `~/Projects/bin/open_test.sh %:p`<cr>
-
-"----------------------------------------------------------------------------
-" Most of these are from stevelosh.com/blog/2010/09/coming-home-to-vim/
-"----------------------------------------------------------------------------
-set ttyfast
-
-if version >= 703
-	"set relativenumber
-	nnoremap <F5> :GundoToggle<CR>
-	let g:gundo_width = 40
-	let g:gundo_preview_height = 30
-	let g:gundo_preview_bottom = 1
-endif
-
-" this should fix vims crazy regex shit to work like PERL/Python
-"nnoremap / /\v
-"vnoremap / /\v
-set gdefault    "this will make \g the default in searches... GREAT!
-
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
-
-" changing wrapping
-set textwidth=79
-set formatoptions=qrn1
-set colorcolumn=80
-
-set list
-set listchars=tab:▸\ ,eol:↘
-
-" remove silly help key
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-
-" make ; : do the same thing
-noremap ; :
-
-"---------------------------
-" His workings on splits
-" --------------------------
-nnoremap <leader>w <C-w>v<C-w>l
-
-:hi OverLength ctermbg=darkred ctermfg=white guibg=#592929
-"match OverLength /\%91v.\+/
-
-" ----------------------------------------------------------------------------
-" Visual Cues
-" ----------------------------------------------------------------------------
-
-set showmatch              " brackets/braces that is
-set mat=5                  " duration to show matching brace (1/10 sec)
-set incsearch              " do incremental searching
-set laststatus=2           " always show the status line
-set ignorecase             " ignore case when searching
-set smartcase              " search string with mixed case will be case sensitive
-"set nohlsearch            " don't highlight searches
-set visualbell             " shut the fuck up
-
-" ---
-" Somethings that might not belong here
-" ---
-if &t_Co > 2 || has("gui_running")
-	syntax on
-	set hlsearch
-endif
-
-if &term=="xterm"
-	set t_Co=8
-	set t_Sb=^[[4%dm
-	set t_Sf=^[[3%dm
-endif
-
-function! RubyTabs()
-	set tabstop=2
-	set softtabstop=2
-	set shiftwidth=2
-	set expandtab
-endfunction
-
-autocmd FileType ruby call RubyTabs()
-
-" ---------------------------------------------------------------------------
-"  Strip all trailing whitespace in file
-" ---------------------------------------------------------------------------
-
-function! StripWhitespace ()
-    exec ':%s/ \+$//gc'
-endfunction
-map <leader>s :call StripWhitespace ()<CR>
-
-let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>'],'AcceptSelection("t")': ['<cr>', '<c-m>'],}
-
-if !has("python3")
-	python from powerline.vim import setup as powerline_setup
-	python powerline_setup()
-	python del powerline_setup
-endif
-
-hi! link SignColumn DarkGrey
