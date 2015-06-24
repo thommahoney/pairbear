@@ -4,38 +4,64 @@
 set ttyfast
 set shell=/bin/bash
 set noswapfile
+set fileformat=unix
 
 " Indenting and Tabs
 set autoindent        " automatic indent new lines
 set smartindent       " be smart about it
-"set nosmarttab       " fuck tabs
+set smarttab          " fuck tabs
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab         " expand tabs to spaces
 set formatoptions+=n  " support for numbered/bullet lists
 
+" Stuff
 set nowrap            " do not wrap lines
 "set textwidth=80     " wrap at 80 chars by default
 set virtualedit=block " allow virtual edit in visual block
                       " (will go into spaces with no characters)
-
 set laststatus=2      " always show the status line
 set showmatch         " brackets/braces that is
 set mat=5             " duration to show matching brace (1/10 sec)
-set incsearch         " do incremental searching
-set ignorecase        " ignore case when searching
-set smartcase         " search string with mixed case will be case sensitive
 set visualbell        " shut the fuck up
 
-" changing wrapping
+" Search and History
+set hlsearch          " highlight search terms
+set incsearch         " do incremental searching
+set smartcase         " search string with mixed case will be case sensitive
+set ignorecase        " ignore case when searching
+set history=1000
+
+" Text Wrapping
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=80 " show vertical line at line 80
+set colorcolumn=80    " show vertical line at line 80
 
-" show invisable characters
+" Show invisable characters
 set list
-set listchars=tab:▸\ ,eol:↘
+set listchars=tab:▸-,trail:·,nbsp:*
+
+
+" Set minimum window height/width
+set winheight=10      "default 1"
+set winwidth=90       "default 20"
+
+
+" Thom ----------------------------------------------------
+" set the title in xterm
+set title
+
+" better buffer management
+set hidden
+
+" gui stuff
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+
+" Save files when vim loses focus
+au FocusLost * :wa
 
 
 " ----------------------------------------------------------------------------
@@ -78,11 +104,21 @@ vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
 
-" movement for splits
+" movement for splits (tommy)
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" window management (Thom)
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+nnoremap <A-s> <C-w>s
+nnoremap <A-q> <C-w>q
+nnoremap <A-n> <C-w>n
+
 
 " resizing splits
 nnoremap <A-l> :vertical resize -5<cr>
@@ -93,8 +129,10 @@ nnoremap <A-h> :vertical resize +5<cr>
 nnoremap <silent> <Leader>= :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
-" clear search highlighting
-nnoremap <leader><space> :noh<cr>
+" clear highlight and redraw
+nnoremap <leader><space> :nohls<cr>
+nnoremap <C-L> :nohls<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR>
 
 " remove silly help key
 inoremap <F1> <ESC>
@@ -106,15 +144,21 @@ noremap ; :
 
 " quick buffer delete
 nnoremap <leader>` :bd
+
 " quick cat this file
 nnoremap <leader>c :!cat %
 
+" Thom -------------------------------------------------------
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Wa ((getcmdtype() is# ':' && getcmdline() is# 'Wa')?('wa'):('Wa'))
 cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa'):('Wqa'))
 cnoreabbrev <expr> E ((getcmdtype() is# ':' && getcmdline() is# 'E')?('e'):('E'))
 
-nnoremap <leader>f :CtrlP<CR>
+" disable ex mode
+:map Q <Nop>
+
+map <leader>= gg=G<CR>
+map <leader>ct :set et <bar> retab<CR>
 
 
 " ----------------------------------------------------------------------------
@@ -140,9 +184,10 @@ set nostartofline          " don't jump to the start of line when scrolling
 set scrolloff=10           " keep cursor 10 lines from the top or bottom
 
 " Wild menu ??? -------------------------------
-"set wildmenu
-"set wildmode=list:longest,full
-" ---------------------------------------------
+" <tab> completion for filenames
+set wildmenu
+set wildmode=list:longest,full
+set complete-=i "CTRLP may make this moot
 
 " Splits --------------------------------------
 "  set default split directions
@@ -166,28 +211,52 @@ colorscheme solarized
 " Plugin stuff
 "----------------------------------------------------------------------------
 
+" Ack
+map <leader>a :Ack<space>
+map <leader>a* :Ack<space><cword><CR>
+set grepprg=ack
+set grepformat=%f:%l:%m
+
 " Numbers
 let g:numbers_exclude = ['gundo', 'nerdtree']
 nnoremap <F3> :NumbersToggle<CR>
-nnoremap <F4> :NERDTreeToggle<CR>
 
 " NERDCommenter
 nnoremap <leader>c<space> :NERDComToggleComment
 
+" NERDTree
+nnoremap <F4> :NERDTreeToggle<CR>
+" Thom -----------------------------------------------------
+" map <leader>n :NERDTreeToggle<CR> (CONFLICTS)
+map <leader>ntm :NERDTreeMirror<CR>
+map <leader>ntc :NERDTreeClose<CR>
+map <leader>ntf :NERDTreeFind<CR>
+
+
 " Tabular
-nnoremap <Leader>a= :Tabularize /=
-nnoremap <Leader>a: :Tabularize /:
-nnoremap <Leader>a:: :Tabularize /:\zs
-nnoremap <Leader>a, :Tabularize /,
-nnoremap <Leader>a<Bar> :Tabularize /|
+nnoremap <Leader>a= :Tabularize /=<cr>
+nnoremap <Leader>ah :Tabularize /=><cr>
+nnoremap <Leader>a# :Tabularize /#<cr>
+nnoremap <Leader>a{ :Tabularize /{<cr>
+nnoremap <Leader>a: :Tabularize /:<cr>
+nnoremap <Leader>a:: :Tabularize /:\zs<cr>
+nnoremap <Leader>a, :Tabularize /,<cr>
+nnoremap <Leader>a<Bar> :Tabularize /|<cr>
+nnoremap <Leader>A :Tabularize /[A-Z].*<cr>:'<,'>s/\s*$//<cr><C-l>
 
 " CtrlP
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git,*/bundle/*
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+
 let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_match_window_reversed = 0
 
 let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-v>', '<2-LeftMouse>'], 'AcceptSelection("v")': ['<cr>', '<RightMouse>'] }
 let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>'],'AcceptSelection("t")': ['<cr>', '<c-m>'],}
 
+nnoremap <leader>f :CtrlP<CR>
+map <leader>g :CtrlPBuffer<CR>
+map <leader>cf :CtrlPClearCache<CR>
 
 " Syntastic
 let g:syntastic_error_symbol='✗'
@@ -196,6 +265,7 @@ let g:syntastic_quiet_warnings=0
 let g:syntastic_ruby_checkers=['mri']
 "let g:syntastic_ruby_checkers=['mri', 'rubocop']
 nmap <F8>  :SyntasticCheck rubocop<cr>
+"nnoremap <leader>ne :lnext<CR> (CONFLICTS)
 
 " Gundo
 if version >= 703
@@ -235,19 +305,16 @@ nnoremap :g/ :g/\v
 nnoremap :g// :g//
 
 
-" ---
-" Somethings that might not belong here
-" ---
-if &t_Co > 2 || has("gui_running")
-	syntax on
-	set hlsearch
-endif
+"----------------------------------------------------------------------------
+" Other
+"----------------------------------------------------------------------------
 
 if &term=="xterm"
 	set t_Co=8
 	set t_Sb=^[[4%dm
 	set t_Sf=^[[3%dm
 endif
+
 
 " ---------------------------------------------------------------------------
 "  Strip all trailing whitespace in file
@@ -258,4 +325,15 @@ function! StripWhitespace ()
 endfunction
 map <leader>s :call StripWhitespace ()<CR>
 
+" remove trailing whitespace automatically
+autocmd FileType c,cpp,java,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" retab on write
+autocmd FileType c,cpp,java,php,ruby autocmd BufWritePre <buffer> :set et | retab
+
+
+" ---------------------------------------------------------------------------
+"  Finalize
+" ---------------------------------------------------------------------------
+syntax on
 hi! link SignColumn DarkGrey
