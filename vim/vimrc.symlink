@@ -42,5 +42,283 @@ filetype plugin indent on
 " Vundle (end)
 "-----------------------------------------------------
 
+" ----------------------------------------------------------------------------
+"  Generic Settings
+" ----------------------------------------------------------------------------
 set shell=/bin/bash
 set noswapfile
+set fileformat=unix
+
+" Indenting and Tabs
+set smartindent       " be smart about it
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab         " expand tabs to spaces
+set formatoptions+=n  " support for numbered/bullet lists
+
+" Stuff
+set nowrap            " do not wrap lines
+"set textwidth=80     " wrap at 80 chars by default
+set virtualedit=block " allow virtual edit in visual block
+                      " (will go into spaces with no characters)
+set showmatch         " brackets/braces that is
+set visualbell        " shut the fuck up
+
+" Search and History
+set hlsearch          " highlight search terms
+set smartcase         " search string with mixed case will be case sensitive
+set ignorecase        " ignore case when searching
+set history=1000
+
+" Text Wrapping
+set colorcolumn=80    " show vertical line at line 80
+
+" Show invisable characters
+set list
+set listchars=tab:▸-,trail:·,nbsp:*
+
+" Set minimum window height/width
+set winheight=10      "default 1"
+set winwidth=80       "default 20"
+
+" better buffer management
+set hidden
+
+
+" ----------------------------------------------------------------------------
+"  Generic Remapping
+" ----------------------------------------------------------------------------
+
+" lead with ,
+let mapleader = ","
+
+" make Y act like A, I, D, etc
+nnoremap Y y$
+
+" reflow paragraph with Q in normal and visual mode
+nnoremap Q gqap
+vnoremap Q gq
+
+" Quit toggle paste mode
+:nmap \o :set paste!<cr>
+
+" toggle to last buffer
+:nmap <C-e> :e#<cr>
+nnoremap <leader>n :bnext<cr>
+nnoremap <leader>p :bprevious<cr>
+
+" move cursor to next split
+nnoremap <leader><leader> <C-w><C-w>
+
+" movement for splits (tommy)
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" clear highlight and redraw
+nnoremap <leader><space> :nohls<cr>
+nnoremap <C-L> :nohls<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR>
+
+" remove silly help key
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+" make ; : do the same thing
+noremap ; :
+
+" quick buffer delete
+nnoremap <leader>` :bd
+
+" quick cat this file
+nnoremap <leader>c :!cat %
+
+" Fix my too lazy pinky fuck ups
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Wa ((getcmdtype() is# ':' && getcmdline() is# 'Wa')?('wa'):('Wa'))
+cnoreabbrev <expr> Wqa ((getcmdtype() is# ':' && getcmdline() is# 'Wqa')?('wqa'):('Wqa'))
+cnoreabbrev <expr> E ((getcmdtype() is# ':' && getcmdline() is# 'E')?('e'):('E'))
+
+" reindent whole file
+map <leader>= gg=G<CR>
+
+" sorting of a block
+map <leader>srt :!sort<CR>
+
+" Ruby
+map <leader>r19 :s/\v:([0-9a-z_]+)\s+\=\>\s+/\1: /g<CR>
+map <leader>r18 :s/\v([0-9a-z_"']+):\s+(.*)/:\1 => \2/g<CR>
+
+
+" ----------------------------------------------------------------------------
+"  UI
+" ----------------------------------------------------------------------------
+
+set noshowmode             " hide --- MODE --- line as airline is good enough
+
+set cursorline
+set nolazyredraw           " turn off lazy redraw
+set number                 " line numbers
+
+set ch=1                   " command line height
+set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
+set shortmess=filtIoOAx    " shorten messages
+set report=0               " tell us about changes (default 2)
+                           " represents the number of lines needed to change
+                           " before warning
+
+set nostartofline          " don't jump to the start of line when scrolling
+set scrolloff=13           " keep cursor 10 lines from the top or bottom
+
+" Splits --------------------------------------
+
+" set default split directions
+set splitbelow
+set splitright
+
+
+"----------------------------------------------------------------------------
+" Color Scheme (Solarized)
+"----------------------------------------------------------------------------
+set background=dark
+let g:solarized_contrast="normal"
+let g:solarized_visibility="low"
+colorscheme solarized
+
+
+"----------------------------------------------------------------------------
+" Plugin stuff
+"----------------------------------------------------------------------------
+
+" Ack
+map <leader>a :Ack<space>
+map <leader>a* :Ack<space><cword><CR>
+set grepprg=ack
+set grepformat=%f:%l:%m
+
+" Numbers
+let g:numbers_exclude = ['gundo', 'nerdtree']
+nnoremap <F3> :NumbersToggle<CR>
+
+" NERDCommenter
+nnoremap <leader>c<space> :NERDComToggleComment
+
+" NERDTree
+nnoremap <F4> :NERDTreeToggle<CR>
+map <leader>ntf :NERDTreeFind<CR>
+
+" Tabular
+noremap <leader>a= :Tabularize /=<cr>
+noremap <leader>ah :Tabularize /=><cr>
+noremap <leader>a# :Tabularize /#<cr>
+noremap <leader>a{ :Tabularize /{<cr>
+noremap <leader>a: :Tabularize /:<cr>
+noremap <leader>a:: :Tabularize /:\zs<cr>
+noremap <leader>a, :Tabularize /,<cr>
+noremap <leader>a<Bar> :Tabularize /<Bar><cr>
+
+" CtrlP
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git,*/bundle/*
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+
+let g:ctrlp_match_window_bottom = 1
+let g:ctrlp_match_window_reversed = 0
+
+" let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-v>', '<2-LeftMouse>'], 'AcceptSelection("v")': ['<cr>', '<RightMouse>'] }
+" let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<c-t>'],'AcceptSelection("t")': ['<cr>', '<c-m>'],}
+
+nnoremap <leader>f :CtrlP<CR>
+map <leader>g :CtrlPBuffer<CR>
+map <leader>cf :CtrlPClearCache<CR>
+
+" Syntastic
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='~'
+let g:syntastic_quiet_messages = {'level': 'warnings'}
+let g:syntastic_ruby_checkers=['mri']
+nmap <F8>  :SyntasticCheck rubocop<cr>
+nnoremap <leader>ne :lnext<CR>
+
+" Gundo
+if version >= 703
+  nnoremap <F5> :GundoToggle<CR>
+  let g:gundo_width = 40
+  let g:gundo_preview_height = 20
+  let g:gundo_preview_bottom = 1
+endif
+
+" AirLine
+let g:airline_powerline_fonts  = 1
+let g:airline_theme            = 'solarized'
+let g:airline_enable_branch    = 1
+let g:airline_enable_syntastic = 1
+let g:airline_enable_fugitive  = 1
+let g:airline_enable_ctrlp     = 1
+let g:airline_enable_gundo     = 1
+let g:airline_enable_nerdtree  = 1
+
+let g:airline#extensions#tabline#enabled = 1
+
+
+"----------------------------------------------------------------------------
+" Search and Replace
+"----------------------------------------------------------------------------
+
+set gdefault "this will make \g the default in searches.
+
+" always add \v . This makes searches require less escaping and act like egrep
+" this is literally called `very magic` mode...
+nnoremap / /\v
+vnoremap / /\v
+
+" make magic mode the default in find and replace as well.
+cnoremap %s/ %smagic/
+cnoremap \>s/ \>smagic/
+
+" this does not work well with :g... so shut that down.
+nnoremap :g/ :g/\v
+nnoremap :g// :g//
+
+
+"----------------------------------------------------------------------------
+" Other
+"----------------------------------------------------------------------------
+
+if &term=="xterm"
+	set t_Co=8
+	set t_Sb=^[[4%dm
+	set t_Sf=^[[3%dm
+endif
+
+
+" ---------------------------------------------------------------------------
+"  Strip all trailing whitespace in file
+" ---------------------------------------------------------------------------
+
+function! StripWhitespace ()
+    exec ':%s/ \+$//gc'
+endfunction
+map <leader>s :call StripWhitespace ()<CR>
+
+" clear tabs
+map <leader>ct :set et <bar> retab<CR>
+
+" remove trailing spaces
+map <leader>rts %s/\v\s+$//g<CR>
+
+" remove trailing whitespace automatically
+autocmd FileType c,cpp,java,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" retab on write
+autocmd FileType c,cpp,java,php,ruby autocmd BufWritePre <buffer> :set et | retab
+
+
+" ---------------------------------------------------------------------------
+"  Finalize
+" ---------------------------------------------------------------------------
+syntax on
+hi! link SignColumn DarkGrey
+
