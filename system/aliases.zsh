@@ -10,7 +10,7 @@ else
   gls_color='-G'
 fi
 
-alias ls="gls_command -F $gls_color"
-alias l="gls_command -lAh $gls_color"
-alias ll="gls_command -l $gls_color"
-alias la="gls_command -A $gls_color"
+alias ls="$gls_command -F $gls_color"
+alias l="$gls_command -lAh $gls_color"
+alias ll="$gls_command -l $gls_color"
+alias la="$gls_command -A $gls_color"
