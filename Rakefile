@@ -32,7 +32,6 @@ task :install do
     end
     `ln -s "$PWD/#{linkable}" "#{target}"`
   end
-  `mkdir .marks`
 end
 
 task :uninstall do
