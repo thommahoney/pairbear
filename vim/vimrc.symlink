@@ -35,7 +35,9 @@ Plugin 'tpope/vim-rails'                  " Rails support in vim
 Plugin 'tpope/vim-repeat'                 " remaps `.` for better plugin support
 Plugin 'tpope/vim-sensible'               " sensible defaults for vim
 Plugin 'tpope/vim-surround'               " change surrounding things with other things
-Plugin 'edkolev/tmuxline.vim'
+Plugin 'edkolev/tmuxline.vim'             " allows tmux to share vim airline settings
+Plugin 'christoomey/vim-tmux-navigator'   " tmux vim seemless nav
+Plugin 'gcmt/wildfire.vim'                " select next closest block
 
 call vundle#end() " required
 filetype plugin indent on
